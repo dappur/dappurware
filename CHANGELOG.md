@@ -6,4 +6,4 @@
 
 
 [Unreleased]: https://github.com/dappur/dappurware/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/dappur/dappurware/v1.0.0
+[1.0.0]: https://github.com/dappur/dappurware/releases/tag/v1.0.0
