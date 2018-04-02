@@ -52,7 +52,7 @@ class Settings
 
     public function getThemeList()
     {
-        $internalAssets = array_filter(glob(__DIR__ . '/../../views/*'), 'is_dir');
+        $internalAssets = array_filter(glob(__DIR__ . '/../../../../../../app/views/*'), 'is_dir');
 
         $internalArray = array();
         foreach ($internalAssets as $value) {
