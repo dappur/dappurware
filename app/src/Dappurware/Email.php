@@ -407,8 +407,10 @@ class Email extends Dappurware
                         $output['users'][] = $emailUser->id;
                     }
                 }
-                
-                $output['email'][] = $value;
+
+                if (!$emailUser) {
+                    $output['email'][] = $value;
+                }
             }
 
             //if other, check to see if user role exists for slug
