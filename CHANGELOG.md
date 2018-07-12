@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [1.0.5] - 2018-07-12
+### Fixed
+- Issue with publish date not saving correctly in the blog.
+
+## [1.0.4] - 2018-05-30
+### Fixed
+- Issue with duplicate emails being sent if user was already registered.
+
 ## [1.0.3] - 2018-04-02
 ### Changed
 - Fixed reference to themes folder in Settings.php
@@ -19,7 +27,9 @@
 - Separated Dappurware from the framework.
 
 
-[Unreleased]: https://github.com/dappur/dappurware/compare/v1.0.3...HEAD
+[Unreleased]: https://github.com/dappur/dappurware/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/dappur/dappurware/compare/v1.0.4...v1.0.5
+[1.0.4]: https://github.com/dappur/dappurware/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/dappur/dappurware/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/dappur/dappurware/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/dappur/dappurware/compare/v1.0.0...v1.0.1

@@ -53,7 +53,7 @@ class Blog extends Dappurware
         $this->processVideo();
 
         // Process Publish At Date
-        $this->publishAt = Carbon::parse($requestParams['publishAt']);
+        $this->publishAt = Carbon::parse($requestParams['publish_at']);
 
         if ($this->validator->isValid()) {
             $newPost = new BlogPosts;
@@ -115,7 +115,7 @@ class Blog extends Dappurware
         $this->processVideo();
 
         // Process Publish At Date
-        $this->publishAt = Carbon::parse($requestParams['publishAt']);
+        $this->publishAt = Carbon::parse($requestParams['publish_at']);
 
         if ($this->validator->isValid()) {
             $post->title = $requestParams['title'];
