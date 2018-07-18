@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [1.0.6] - 2018-07-17
+### Fixed
+- Issue with email recipients it was an ID
+
 ## [1.0.5] - 2018-07-12
 ### Fixed
 - Issue with publish date not saving correctly in the blog.
@@ -27,7 +31,8 @@
 - Separated Dappurware from the framework.
 
 
-[Unreleased]: https://github.com/dappur/dappurware/compare/v1.0.5...HEAD
+[Unreleased]: https://github.com/dappur/dappurware/compare/v1.0.6...HEAD
+[1.0.6]: https://github.com/dappur/dappurware/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/dappur/dappurware/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/dappur/dappurware/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/dappur/dappurware/compare/v1.0.2...v1.0.3

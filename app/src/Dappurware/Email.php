@@ -346,8 +346,7 @@ class Email extends Dappurware
 
                     if (!$sendEmail) {
                         $output['results']['errors'][] = array("email" => $userTemp->email, "error" => $result['error']);
-                    }   
-                    
+                    }
                 }
             }
 
@@ -392,11 +391,9 @@ class Email extends Dappurware
         $output = array();
         $output['users'] = array();
         foreach ($sendTo as $value) {
-            if (is_int($value)) {
-                // If int, get user email
-                if ($this->auth->findById($value)) {
-                    $output['users'][] = $value;
-                }
+            // If int, get user email
+            if ($this->auth->findById($value)) {
+                $output['users'][] = $value;
             }
 
             if (filter_var($value, FILTER_VALIDATE_EMAIL)) {
