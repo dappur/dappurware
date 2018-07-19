@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [1.1.0] - 2018-07-19
+### Added
+- Moved `TwigExtensions` src from Framework
+- Added Gravatar Twig extension
+
 ## [1.0.6] - 2018-07-17
 ### Fixed
 - Issue with email recipients it was an ID
@@ -31,7 +36,8 @@
 - Separated Dappurware from the framework.
 
 
-[Unreleased]: https://github.com/dappur/dappurware/compare/v1.0.6...HEAD
+[Unreleased]: https://github.com/dappur/dappurware/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/dappur/dappurware/compare/v1.0.6...v1.1.0
 [1.0.6]: https://github.com/dappur/dappurware/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/dappur/dappurware/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/dappur/dappurware/compare/v1.0.3...v1.0.4
