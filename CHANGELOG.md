@@ -4,8 +4,7 @@
 
 ## [1.1.1] - 2018-07-29
 ### Added
-- Moved `TwigExtensions` src from Framework
-- Added Gravatar Twig extension
+- Menus to `TwigExtensions`
 
 ## [1.1.0] - 2018-07-19
 ### Added
