@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### No changes yet...
+
+## [1.1.2] - 2018-07-30
+### Fixed
+- Made menu validation recursive to fix permissions issue
 
 ## [1.1.1] - 2018-07-29
 ### Added
@@ -40,7 +45,8 @@
 - Separated Dappurware from the framework.
 
 
-[Unreleased]: https://github.com/dappur/dappurware/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/dappur/dappurware/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/dappur/dappurware/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/dappur/dappurware/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/dappur/dappurware/compare/v1.0.6...v1.1.0
 [1.0.6]: https://github.com/dappur/dappurware/compare/v1.0.5...v1.0.6

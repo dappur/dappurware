@@ -5,8 +5,8 @@ namespace Dappur\TwigExtension;
 use Interop\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
 
-class Menus extends \Twig_Extension {
-
+class Menus extends \Twig_Extension
+{
     protected $auth;
     protected $request;
 
@@ -15,20 +15,29 @@ class Menus extends \Twig_Extension {
         $this->container = $container;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return 'menus';
     }
 
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new \Twig_SimpleFunction('getMenu', [$this, 'getMenu'])
         ];
     }
 
-    public function getMenu($menuId) {
-        $menu = \Dappur\Model\Menus::find($menuId);
+    public function getMenu($menuId)
+    {
+        $menu = new \Dappur\Model\Menus;
+        $menu = $menu->find($menuId);
         $menu = json_decode($menu->json, true);
+        $menu = $this->validateMenu($menu);
+        return $menu;
+    }
 
+    private function validateMenu($menu)
+    {
         $user = $this->container->auth->check();
 
         foreach ($menu as $key => $value) {
@@ -42,30 +51,45 @@ class Menus extends \Twig_Extension {
                 continue;
             }
 
-            if (!empty($value['permission']) && !$user->hasAccess($value['permission'])) {
+            if (!empty($value['permission']) && !$this->container->auth->hasAccess($value['permission'])) {
                 unset($menu[$key]);
                 continue;
             }
 
-            if ($value['roles'] && !empty($value['roles']) && $user) {
+            if ($value['roles'] && !empty($value['roles'])) {
                 $hasRole = false;
+                if (!$user) {
+                    unset($menu[$key]);
+                    continue;
+                }
+
                 foreach ($value['roles'] as $role) {
                     if ($user->inRole($role)) {
                         $hasRole = true;
                     }
                 }
+                    
                 if (!$hasRole) {
                     unset($menu[$key]);
                     continue;
                 }
             }
 
-            $htmlTemp = new \Twig_Environment(new \Twig_Loader_Array([$value['text'] . '_html' => $value['text']]));
-            $htmlTemp = $htmlTemp->render($value['text'] . '_html', array("user" => $user));
+            if (isset($value['children']) && !empty($value['children'])) {
+                $menu[$key]['children'] = $this->validateMenu($value['children']);
+            }
+
+            $htmlTemp = new \Twig_Environment(
+                new \Twig_Loader_Array([$value['text'] . '_html' => $value['text']])
+            );
+            $htmlTemp = $htmlTemp->render(
+                $value['text'] . '_html',
+                array("user" => $user)
+            );
 
             $menu[$key]['text'] = $htmlTemp;
-
         }
+
         return $menu;
     }
 }
