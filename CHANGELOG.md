@@ -1,7 +1,20 @@
 # Changelog
 
 ## [Unreleased]
-### No changes yet...
+
+## [3.0.0]
+### Notes
+I am bumping the version number on on Dappurware for this release to v3.0.0.  This is so that the framework and dappurware will share the same major version number.  Breaking changes will only be introduced in major version updates along with the framework.
+
+### Added
+- Deployment: Database connection validation while checking requirements.
+
+### Changed
+- Deployment: Using `GIT_SSH_COMMAND` now for identity file access and removed
+
+### Removed
+- Deployment: Check and update settings functions as they were not used.
+- Deployment: Install deploy key in favor of direct identity file access using `GIT_SSH_COMMAND`
 
 ## [1.1.2] - 2018-07-30
 ### Fixed
@@ -45,7 +58,8 @@
 - Separated Dappurware from the framework.
 
 
-[Unreleased]: https://github.com/dappur/dappurware/compare/v1.1.2...HEAD
+[Unreleased]: https://github.com/dappur/dappurware/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/dappur/dappurware/compare/v1.1.2...v3.0.0
 [1.1.2]: https://github.com/dappur/dappurware/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/dappur/dappurware/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/dappur/dappurware/compare/v1.0.6...v1.1.0
