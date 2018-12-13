@@ -1,6 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+### No Changes
+
+## [4.0.0]
+### Notes
+- I promise this will be the last major version upgrade for a while (I hope).  This was necessary in order to separate out the heavier dappurwares into their own repository so that they could be developed further.  The dapurwares that were moved into their own repositories are:
+	- Deployment
+	- Email
+	- Oauth2
+	- Video
 
 ## [3.0.0]
 ### Notes
@@ -58,7 +67,8 @@ I am bumping the version number on on Dappurware for this release to v3.0.0.  Th
 - Separated Dappurware from the framework.
 
 
-[Unreleased]: https://github.com/dappur/dappurware/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/dappur/dappurware/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/dappur/dappurware/compare/v3.0.0...v4.0.0
 [3.0.0]: https://github.com/dappur/dappurware/compare/v1.1.2...v3.0.0
 [1.1.2]: https://github.com/dappur/dappurware/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/dappur/dappurware/compare/v1.1.0...v1.1.1
