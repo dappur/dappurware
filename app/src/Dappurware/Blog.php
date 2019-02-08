@@ -67,6 +67,7 @@ class Blog extends Dappurware
             $newPost->category_id = $this->categoryId;
             $newPost->user_id = $this->container->auth->check()->id;
             $newPost->publish_at = $this->publishAt;
+            $newPost->status = 0;
             if ($requestParams['status']) {
                 $newPost->status = 1;
             }

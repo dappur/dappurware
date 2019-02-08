@@ -1,7 +1,8 @@
 # Changelog
 
 ## [Unreleased]
-### No Changes
+### Fixed
+- Blog post status was not toggling
 
 ## [4.0.0]
 ### Notes
