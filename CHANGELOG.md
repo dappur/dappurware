@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Fixed
 - Blog post status was not toggling
+- Code cleanup
 
 ## [4.0.0]
 ### Notes

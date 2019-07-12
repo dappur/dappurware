@@ -29,11 +29,11 @@ class Gravatar extends \Twig_Extension
      * @return String containing either just a URL or a complete image tag
      * @source https://gravatar.com/site/implement/images/php/
      */
-    public function gravatar($email, $s = 160, $d = 'mp', $r = 'g', $img = false, $atts = array())
+    public function gravatar($email, $size = 160, $default = 'mp', $rating = 'g', $img = null, $atts = array())
     {
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($email)));
-        $url .= "?s=$s&d=$d&r=$r";
+        $url .= "?s=$size&d=$default&r=$rating";
         if ($img) {
             $url = '<img src="' . $url . '"';
             foreach ($atts as $key => $val) {
