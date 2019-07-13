@@ -4,25 +4,29 @@ namespace Dappur\TwigExtension;
 
 use Psr\Http\Message\RequestInterface;
 
-class Asset extends \Twig_Extension {
-
+class Asset extends \Twig_Extension
+{
     protected $request;
 
-    public function __construct(RequestInterface $request) {
+    public function __construct(RequestInterface $request)
+    {
         $this->request = $request;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return 'asset';
     }
 
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new \Twig_SimpleFunction('asset', [$this, 'asset'])
         ];
     }
 
-    public function asset($path) {
+    public function asset($path)
+    {
         return '/asset?path=' . $path;
     }
 }

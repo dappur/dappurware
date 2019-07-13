@@ -36,6 +36,10 @@ class Menus extends \Twig_Extension
         return $menu;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     */
     private function validateMenu($menu)
     {
         $user = $this->container->auth->check();

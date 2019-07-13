@@ -2,17 +2,8 @@
 
 namespace Dappur\Dappurware;
 
-use Carbon\Carbon;
-use Dappur\Dappurware\Utils;
-use Dappur\Dappurware\VideoParser as VP;
-use Dappur\Model\BlogCategories;
-use Dappur\Model\BlogPosts;
-use Dappur\Model\BlogPostsTags;
-use Dappur\Model\BlogTags;
 use Interop\Container\ContainerInterface;
-use Respect\Validation\Validator as V;
 
-/** @SuppressWarnings(PHPMD.StaticAccess) */
 class Blog extends Dappurware
 {
     protected $categoryId;
@@ -22,6 +13,7 @@ class Blog extends Dappurware
     protected $videoId;
     protected $publishAt;
 
+    /** @SuppressWarnings(PHPMD.StaticAccess) */
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
@@ -30,9 +22,11 @@ class Blog extends Dappurware
         $this->parsedTags = null;
         $this->videoProvider = null;
         $this->videoId = null;
-        $this->publishAt = Carbon::now();
+        $this->publishAt = \Carbon\Carbon::now();
+        $this->utils = new Dappur\Dappurware\Utils;
     }
 
+    /** @SuppressWarnings(PHPMD.StaticAccess) */
     public function addPost()
     {
         $requestParams = $this->container->request->getParams();
@@ -53,10 +47,10 @@ class Blog extends Dappurware
         $this->processVideo();
 
         // Process Publish At Date
-        $this->publishAt = Carbon::parse($requestParams['publish_at']);
+        $this->publishAt = \Carbon\Carbon::parse($requestParams['publish_at']);
 
         if ($this->validator->isValid()) {
-            $newPost = new BlogPosts;
+            $newPost = new \Dappur\Model\BlogPosts;
             $newPost->title = $requestParams['title'];
             $newPost->description = $requestParams['description'];
             $newPost->slug = $this->slug;
@@ -67,6 +61,7 @@ class Blog extends Dappurware
             $newPost->category_id = $this->categoryId;
             $newPost->user_id = $this->container->auth->check()->id;
             $newPost->publish_at = $this->publishAt;
+            $newPost->status = 0;
             if ($requestParams['status']) {
                 $newPost->status = 1;
             }
@@ -74,7 +69,7 @@ class Blog extends Dappurware
             $newPost->save();
             
             foreach ($this->parsedTags as $tag) {
-                $addTag = new BlogPostsTags;
+                $addTag = new \Dappur\Model\BlogPostsTags;
                 $addTag->post_id = $newPost->id;
                 $addTag->tag_id = $tag;
                 $addTag->save();
@@ -87,6 +82,7 @@ class Blog extends Dappurware
         return false;
     }
 
+    /** @SuppressWarnings(PHPMD.StaticAccess) */
     public function updatePost($postId)
     {
         $this->blogEdit = true;
@@ -94,7 +90,8 @@ class Blog extends Dappurware
         $requestParams = $this->container->request->getParams();
 
         //Check Post
-        $post = BlogPosts::find($postId);
+        $post = new \Dappur\Model\BlogPosts::find($postId);
+        $post = $post->find($postId);
 
         if (!$post) {
             return false;
@@ -115,7 +112,7 @@ class Blog extends Dappurware
         $this->processVideo();
 
         // Process Publish At Date
-        $this->publishAt = Carbon::parse($requestParams['publish_at']);
+        $this->publishAt = \Carbon\Carbon::parse($requestParams['publish_at']);
 
         if ($this->validator->isValid()) {
             $post->title = $requestParams['title'];
@@ -135,10 +132,10 @@ class Blog extends Dappurware
             $post->save();
 
             //Delete Existing Post Tags
-            BlogPostsTags::where('post_id', $post->id)->delete();
+            \Dappur\Model\BlogPostsTags::where('post_id', $post->id)->delete();
             
             foreach ($this->parsedTags as $tag) {
-                $addTag = new BlogPostsTags;
+                $addTag = new \Dappur\Model\BlogPostsTags;
                 $addTag->post_id = $post->id;
                 $addTag->tag_id = $tag;
                 $addTag->save();
@@ -153,7 +150,8 @@ class Blog extends Dappurware
 
     public function delete()
     {
-        $post = BlogPosts::find($this->container->request->getParam('post_id'));
+        $post = new \Dappur\Model\BlogPosts;
+        $post = $post->find($this->container->request->getParam('post_id'));
 
         if ($post) {
             if ($post->delete()) {
@@ -165,7 +163,8 @@ class Blog extends Dappurware
 
     public function publish()
     {
-        $post = BlogPosts::find($this->container->request->getParam('post_id'));
+        $post = new \Dappur\Model\BlogPosts;
+        $post = $post->find($this->container->request->getParam('post_id'));
 
         if ($post) {
             $post->status = 1;
@@ -178,7 +177,8 @@ class Blog extends Dappurware
 
     public function unpublish()
     {
-        $post = BlogPosts::find($this->container->request->getParam('post_id'));
+        $post = new \Dappur\Model\BlogPosts;
+        $post = $post->find($this->container->request->getParam('post_id'));
 
         if ($post) {
             $post->status = 0;
@@ -194,14 +194,14 @@ class Blog extends Dappurware
         //Validate Data
         $validateData = array(
             'title' => array(
-                'rules' => V::length(6, 255)->alnum('\',.?!@#$%&*()-_"'),
+                'rules' => \Respect\Validation\Validator::length(6, 255)->alnum('\',.?!@#$%&*()-_"'),
                     'messages' => array(
                     'length' => 'Must be between 6 and 255 characters.',
                     'alnum' => 'Invalid Characters Only \',.?!@#$%&*()-_" are allowed.'
                 )
             ),
             'description' => array(
-                'rules' => V::length(6, 255)->alnum('\',.?!@#$%&*()-_"'),
+                'rules' => \Respect\Validation\Validator::length(6, 255)->alnum('\',.?!@#$%&*()-_"'),
                     'messages' => array(
                     'length' => 'Must be between 6 and 255 characters.',
                     'alnum' => 'Invalid Characters Only \',.?!@#$%&*()-_" are allowed.'
@@ -210,7 +210,8 @@ class Blog extends Dappurware
         );
         $this->validator->validate($this->container->request, $validateData);
 
-        $checkTitle = BlogPosts::where('title', $this->container->request->getParam('title'));
+        $checkTitle = new \Dappur\Model\BlogPosts;
+        $checkTitle = $checkTitle->where('title', $this->container->request->getParam('title'));
         if ($postId) {
             $checkTitle = $checkTitle->where('id', '!=', $postId);
         }
@@ -224,19 +225,20 @@ class Blog extends Dappurware
         $categoryId = $this->container->request->getParam('category');
         
         // Check if category exists by id
-        $categoryCheck = BlogCategories::find($categoryId);
+        $categoryCheck = new \Dappur\Model\BlogCategories;
+        $categoryCheck = $categoryCheck->find($categoryId);
 
         if (!$categoryCheck) {
             // Check if category exists by name
-            $checkCat = BlogCategories::where('name', $categoryId)->first();
+            $checkCat = \Dappur\Model\BlogCategories::where('name', $categoryId)->first();
             if ($checkCat) {
                 $categoryId = $checkCat->category_id;
             }
 
             // Add new category if not exists
-            $addCategory = new BlogCategories;
+            $addCategory = new \Dappur\Model\BlogCategories;
             $addCategory->name = $categoryId;
-            $addCategory->slug = Utils::slugify($categoryId);
+            $addCategory->slug = $this->utils->slugify($categoryId);
             $addCategory->status = 1;
             $addCategory->save();
             $categoryId = $addCategory->id;
@@ -247,8 +249,9 @@ class Blog extends Dappurware
 
     private function processSlug($postId = null)
     {
-        $slug = Utils::slugify($this->container->request->getParam('title'));
-        $checkSlug = BlogPosts::where('slug', $slug);
+        $slug = $this->utils->slugify($this->container->request->getParam('title'));
+        $checkSlug = new \Dappur\Model\BlogPosts;
+        $checkSlug = $checkSlug->where('slug', $slug);
         if ($postId) {
             $checkSlug = $checkSlug->where('id', '!=', $postId);
         }
@@ -266,7 +269,8 @@ class Blog extends Dappurware
         foreach ($this->container->request->getParam('tags') as $value) {
             // Check if Already Numeric
             if (is_numeric($value)) {
-                $check = BlogTags::find($value);
+                $check = new \Dappur\Model\BlogTags;
+                $check = $check->find($value);
                 if ($check) {
                     $this->parsedTags[] = $value;
                 }
@@ -274,15 +278,15 @@ class Blog extends Dappurware
             }
 
             // Check if slug already exists
-            $slug = Utils::slugify($value);
-            $slugCheck = BlogTags::where('slug', '=', $slug)->first();
+            $slug = $this->utils->slugify($value);
+            $slugCheck = \Dappur\Model\BlogTags::where('slug', '=', $slug)->first();
             if ($slugCheck) {
                 $this->parsedTags[] = $slugCheck->id;
                 continue;
             }
 
             // Add New Tag To Database
-            $newTag = new BlogTags;
+            $newTag = new \Dappur\Model\BlogTags;
             $newTag->name = $value;
             $newTag->slug = $slug;
             if ($newTag->save()) {
@@ -293,6 +297,7 @@ class Blog extends Dappurware
         }
     }
 
+    /** @SuppressWarnings(PHPMD.StaticAccess) */
     private function processVideo()
     {
         $requestParams = $this->container->request->getParams();
@@ -303,8 +308,8 @@ class Blog extends Dappurware
             $this->videoId = $requestParams['video_id'];
         }
         if (!empty($requestParams['video_url'])) {
-            $this->videoProvider = VP::getVideoId($requestParams['video_url']);
-            $this->videoId = VP::getVideoId($requestParams['video_url']);
+            $this->videoProvider = Dappur\Dappurware\VideoParser::getVideoId($requestParams['video_url']);
+            $this->videoId = Dappur\Dappurware\VideoParser::getVideoId($requestParams['video_url']);
         }
 
         // Check Featured Image

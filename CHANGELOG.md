@@ -1,7 +1,12 @@
 # Changelog
 
 ## [Unreleased]
-### No Changes
+- No Changes
+
+## [4.0.1] - 2019-07-12
+### Fixed
+- Blog post status was not toggling
+- Code cleanup
 
 ## [4.0.0]
 ### Notes
@@ -67,7 +72,8 @@ I am bumping the version number on on Dappurware for this release to v3.0.0.  Th
 - Separated Dappurware from the framework.
 
 
-[Unreleased]: https://github.com/dappur/dappurware/compare/v4.0.0...HEAD
+[Unreleased]: https://github.com/dappur/dappurware/compare/v4.0.1...HEAD
+[4.0.1]: https://github.com/dappur/dappurware/compare/v4.0.0...v4.0.1
 [4.0.0]: https://github.com/dappur/dappurware/compare/v3.0.0...v4.0.0
 [3.0.0]: https://github.com/dappur/dappurware/compare/v1.1.2...v3.0.0
 [1.1.2]: https://github.com/dappur/dappurware/compare/v1.1.1...v1.1.2
