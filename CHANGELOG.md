@@ -1,7 +1,10 @@
 # Changelog
 
 ## [Unreleased]
-- No Changes
+### No Changes
+
+## [4.0.2] - 2019-07-14
+- Fixed bug in blog
 
 ## [4.0.1] - 2019-07-12
 ### Fixed

@@ -23,7 +23,7 @@ class Blog extends Dappurware
         $this->videoProvider = null;
         $this->videoId = null;
         $this->publishAt = \Carbon\Carbon::now();
-        $this->utils = new Dappur\Dappurware\Utils;
+        $this->utils = new \Dappur\Dappurware\Utils;
     }
 
     /** @SuppressWarnings(PHPMD.StaticAccess) */
@@ -90,7 +90,7 @@ class Blog extends Dappurware
         $requestParams = $this->container->request->getParams();
 
         //Check Post
-        $post = new \Dappur\Model\BlogPosts::find($postId);
+        $post = new \Dappur\Model\BlogPosts;
         $post = $post->find($postId);
 
         if (!$post) {
