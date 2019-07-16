@@ -6,8 +6,6 @@
  */
 
 namespace Dappur\TwigExtension;
-
-use Dappur\Dappurware\Oauth2Utils;
 use Dappur\Model\Oauth2Providers;
 use Interop\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
@@ -40,7 +38,7 @@ class Oauth2 extends \Twig_Extension
     public function authorizeUrl($providerId, $clientId)
     {
         $check = Oauth2Providers::find($providerId);
-        $oauthUtils = new Oauth2Utils($this->container);
+        $oauthUtils = new \Dappur\Dappurware\Oauth2($this->container);
 
         if ($check) {
             $state = null;
