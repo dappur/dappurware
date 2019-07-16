@@ -2,7 +2,7 @@
     "name": "dappur/dappurware",
     "description": "Support package for the Dappur Framework",
     "keywords": ["dappur", "dappurware", "framework"],
-    "version": "4.0.2",
+    "version": "4.0.3",
     "homepage": "https://github.com/dappur/dappurware",
     "license": "MIT",
     "authors": [

@@ -3,6 +3,10 @@
 ## [Unreleased]
 ### No Changes
 
+## [4.0.3] - 2019-07-15
+### Fixed
+- Updated twig extension for oauth2 to support new class structure
+
 ## [4.0.2] - 2019-07-14
 - Fixed bug in blog
 
