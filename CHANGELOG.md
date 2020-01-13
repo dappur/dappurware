@@ -3,6 +3,10 @@
 ## [Unreleased]
 ### No Changes
 
+## [4.0.4] - 2020-01-13
+### Fixed
+- Migrated Interop to Psr container interface
+
 ## [4.0.3] - 2019-07-15
 ### Fixed
 - Updated twig extension for oauth2 to support new class structure
@@ -79,7 +83,8 @@ I am bumping the version number on on Dappurware for this release to v3.0.0.  Th
 - Separated Dappurware from the framework.
 
 
-[Unreleased]: https://github.com/dappur/dappurware/compare/v4.0.3...HEAD
+[Unreleased]: https://github.com/dappur/dappurware/compare/v4.0.4...HEAD
+[4.0.4]: https://github.com/dappur/dappurware/compare/v4.0.3...v4.0.4
 [4.0.3]: https://github.com/dappur/dappurware/compare/v4.0.2...v4.0.3
 [4.0.2]: https://github.com/dappur/dappurware/compare/v4.0.1...v4.0.2
 [4.0.1]: https://github.com/dappur/dappurware/compare/v4.0.0...v4.0.1
