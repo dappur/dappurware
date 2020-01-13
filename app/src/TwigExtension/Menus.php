@@ -2,7 +2,7 @@
 
 namespace Dappur\TwigExtension;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
 
 class Menus extends \Twig_Extension
