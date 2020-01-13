@@ -7,7 +7,7 @@
 
 namespace Dappur\TwigExtension;
 use Dappur\Model\Oauth2Providers;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
 use Slim\Interfaces\RouterInterface;
 
