@@ -3,6 +3,10 @@
 ## [Unreleased]
 ### No Changes
 
+## [4.0.4] - 2020-01-13
+### Fixed
+- Migrated Interop to Psr container interface
+
 ## [4.0.3] - 2019-07-15
 ### Fixed
 - Updated twig extension for oauth2 to support new class structure
