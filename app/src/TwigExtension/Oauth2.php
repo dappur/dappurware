@@ -10,6 +10,7 @@ use Dappur\Model\Oauth2Providers;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
 use Slim\Interfaces\RouterInterface;
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
@@ -51,34 +52,23 @@ class Oauth2 extends \Twig_Extension
 
             switch ($check->slug) {
                 case 'twitter':
-                    $baseURI = 'https://api.twitter.com/oauth/request_token';
-                    $nonce = time();
-                    $timestamp = time();
-                    $oauth = array('oauth_callback' => $redirectUri,
-                                  'oauth_consumer_key' => $this->container->settings['oauth2']['twitter']['client_id'],
-                                  'oauth_nonce' => $nonce,
-                                  'oauth_signature_method' => 'HMAC-SHA1',
-                                  'oauth_timestamp' => $timestamp,
-                                  'oauth_version' => '1.0');
-                    
-                    $baseString = $oauthUtils->buildBaseString($baseURI, $oauth); //build the base string
-                    $compositeKey = $oauthUtils->getCompositeKey(
-                        $this->container->settings['oauth2']['twitter']['client_secret'],
-                        null
+                    $twConnection = new \Abraham\TwitterOAuth\TwitterOAuth(
+                        $this->container->settings['oauth2']['twitter']['api_key'],
+                        $this->container->settings['oauth2']['twitter']['api_secret']
                     );
-                    $oauthSignature = base64_encode(hash_hmac('sha1', $baseString, $compositeKey, true));
-                    $oauth['oauth_signature'] = $oauthSignature; //add the signature to our oauth array
-                    $response = $oauthUtils->sendRequest($oauth, $baseURI); //make the call
-                    $responseArray = array();
-                    $parts = explode('&', $response);
-                    foreach ($parts as $p) {
-                        $p = explode('=', $p);
-                        $responseArray[$p[0]] = $p[1];
-                    }
-                    $oauthToken = $responseArray['oauth_token'];
-                    $authorizeUrl = "https://api.twitter.com/oauth/authorize?oauth_token=$oauthToken";
+
+                    $requestToken = $twConnection->oauth(
+                        'oauth/request_token', [
+                            'oauth_callback' => $redirectUri
+                        ]
+                    );
+
+                    $authorizeUrl = $twConnection->url(
+                        'oauth/authorize', [
+                            'oauth_token' => $requestToken['oauth_token']
+                        ]
+                    );
                     break;
-                
                 default:
                     $queryParams = urldecode(http_build_query(array(
                         "client_id" => $clientId,
