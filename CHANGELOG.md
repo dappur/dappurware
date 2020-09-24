@@ -3,6 +3,10 @@
 ## [Unreleased]
 ### No Changes
 
+## [4.0.5]
+### Fixed
+- Twitter Auth URL
+
 ## [4.0.4] - 2020-01-13
 ### Fixed
 - Migrated Interop to Psr container interface
@@ -83,7 +87,8 @@ I am bumping the version number on on Dappurware for this release to v3.0.0.  Th
 - Separated Dappurware from the framework.
 
 
-[Unreleased]: https://github.com/dappur/dappurware/compare/v4.0.4...HEAD
+[Unreleased]: https://github.com/dappur/dappurware/compare/v4.0.5...HEAD
+[4.0.5]: https://github.com/dappur/dappurware/compare/v4.0.4...v4.0.5
 [4.0.4]: https://github.com/dappur/dappurware/compare/v4.0.3...v4.0.4
 [4.0.3]: https://github.com/dappur/dappurware/compare/v4.0.2...v4.0.3
 [4.0.2]: https://github.com/dappur/dappurware/compare/v4.0.1...v4.0.2
